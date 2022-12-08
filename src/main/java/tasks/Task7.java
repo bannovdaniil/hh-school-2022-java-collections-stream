@@ -1,17 +1,18 @@
 package tasks;
 
 import common.Company;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import common.Vacancy;
 
-/*
-Из коллекции компаний необходимо получить всевозможные различные названия вакансий
- */
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class Task7 {
 
-  public static Set<String> vacancyNames(Collection<Company> companies) {
-    return new HashSet<>();
-  }
-
+    public static Set<String> vacancyNames(Collection<Company> companies) {
+        return companies.stream()
+                .flatMap(company -> company.getVacancies().stream())
+                .map(Vacancy::getTitle)
+                .collect(Collectors.toSet());
+    }
 }
