@@ -3,6 +3,7 @@ package tasks;
 import common.Person;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,22 +26,11 @@ public class Task8 {
         if (person == null) {
             return "";
         }
-        StringBuilder fullName = new StringBuilder();
-
-        appendNameIfNotNullWithSpace(person.getFirstName(), fullName);
-        appendNameIfNotNullWithSpace(person.getMiddleName(), fullName);
-        appendNameIfNotNullWithSpace(person.getSecondName(), fullName);
-
-        return fullName.toString();
-    }
-
-    private void appendNameIfNotNullWithSpace(String name, StringBuilder fullName) {
-        if (name != null) {
-            if (!fullName.isEmpty()) {
-                fullName.append(" ");
-            }
-            fullName.append(name);
-        }
+        return Stream.of(person.getFirstName(), person.getMiddleName(), person.getSecondName())
+                .filter(Objects::nonNull)
+                .filter(Predicate.not(String::isBlank))
+                .map(String::trim)
+                .collect(Collectors.joining(" "));
     }
 
     public Map<Integer, String> getMapIdWithPersonNames(Collection<Person> persons) {

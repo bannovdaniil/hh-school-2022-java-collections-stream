@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Task8Test {
-    private static Person person1, person2, person3, person4;
+    private static Person person1, person2, person3, person4, person5;
     private static Task8 task8;
 
     @BeforeAll
@@ -27,6 +27,7 @@ class Task8Test {
         person2 = new Person(2, "Ivan", "Ivanov", time.plusSeconds(1));
         person3 = new Person(3, "Ivan", "Ivanov", "Ivanovich", time.minusSeconds(1));
         person4 = new Person(4, "Person 3", time.plusSeconds(2));
+        person5 = new Person(5, "Ivan  ", "  Ivanov", "  ", time.plusSeconds(4));
 
     }
 
@@ -48,7 +49,8 @@ class Task8Test {
                 Arguments.of(null, ""),
                 Arguments.of(person1, "Fake person"),
                 Arguments.of(person2, "Ivan Ivanov"),
-                Arguments.of(person3, "Ivan Ivanovich Ivanov")
+                Arguments.of(person3, "Ivan Ivanovich Ivanov"),
+                Arguments.of(person5, "Ivan Ivanov")
         );
     }
 
