@@ -14,13 +14,14 @@ public class Task6 {
                                                     Map<Integer, Set<Integer>> personAreaIds,
                                                     Collection<Area> areas) {
 
+        Map<Integer, Area> areaMap = areas.stream()
+                .collect(Collectors.toMap(Area::getId, area -> area));
+
         return persons.stream()
                 .flatMap(person -> personAreaIds.get(person.getId()).stream()
-                        .flatMap(areaId -> areas.stream()
-                                .filter(area -> areaId.equals(area.getId()))
-                                .map(areaById -> person.getFirstName() + " - " + areaById.getName())
-                        )
-                )
+                        .filter(areaMap::containsKey)
+                        .map(areaMap::get)
+                        .map(area -> person.getFirstName() + " - " + area.getName()))
                 .collect(Collectors.toSet());
     }
 }
