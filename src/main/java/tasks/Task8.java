@@ -51,7 +51,8 @@ public class Task8 {
         if (persons1 == null || persons2 == null) {
             return false;
         }
-        return !Collections.disjoint(persons1, persons2);
+        return persons1.stream()
+                .anyMatch(new HashSet<>(persons2)::contains);
     }
 
     public long countEvenElements(Stream<Integer> numbers) {
