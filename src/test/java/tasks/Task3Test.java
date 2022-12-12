@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,6 +31,14 @@ class Task3Test {
     void test() {
         assertEquals(List.of(person1, person4, person3, person2), Task3.sort(List.of(person1, person2, person3, person4)));
         assertEquals(List.of(person1, person4, person3, person2), Task3.sort(List.of(person4, person3, person2, person1)));
+    }
+
+    @Test
+    void testWithNull() {
+        List<Person> personsWithNull = new ArrayList<>();
+        personsWithNull.add(null);
+        personsWithNull.add(person1);
+        assertEquals(List.of(person1), Task3.sort(personsWithNull));
     }
 
     @Test
